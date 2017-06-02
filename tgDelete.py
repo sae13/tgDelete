@@ -61,7 +61,7 @@ def schedulerDeleter(sender):
                 # msgSenderId))
                 #print("\n msg txt = {} \n".format(msg.text))
                 if (msg.sender.id not in ADMIN_IDS) and \
-                (( msgHour > 15 ) or ( msgHour < 7 )):
+                (( msgHour > 22 ) or ( msgHour < 7 )):
 #بالا گفتی اگه فرستنده از لیست مدیران نیست و ساعت پیام بین یازده شب تا هفت صبحه
                     sender.send_msg(msgSenderId, msgToFirst)
                     sender.send_msg(msgSenderId, msgToBtw)
