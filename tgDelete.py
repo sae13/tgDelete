@@ -2,22 +2,13 @@
 # coding=utf-8
 #فراخوانی پکیج‌هایی که نیاز داریم
 from __future__ import unicode_literals
-from pytg import Telegram
 from pytg.receiver import Receiver  # get messages
 from pytg.sender import Sender  # send messages, and other querys.
 from pytg.utils import coroutine
 from time import time, localtime
 #قسمت زیر ارتباطمون رو با تلگرام تحت کلای تعریف میکنیم که وصل بشه به تلگراممون
-# tg = Telegram(
-# 	telegram="/home/pi/App/telegram-cli/tg/bin/telegram-cli",
-# 	pubkey_file="/home/pi/App/telegram-cli/tg/tg-server.pub",
-#     port=8092
-#     )
-tg = Telegram(
-		telegram="/home/saeb/Downloads/git/tg/telegram-cli/bin/telegram-cli",
-		pubkey_file="/home/saeb/Downloads/git/tg/telegram-cli/tg-server.pub1",
-	    port=8092
-	    )
+from telegramCliConf import tg
+tg = tg
 inline_image = False
 receiver = tg.receiver
 sender = tg.sender
@@ -70,7 +61,7 @@ def schedulerDeleter(sender):
                 # msgSenderId))
                 #print("\n msg txt = {} \n".format(msg.text))
                 if (msg.sender.id not in ADMIN_IDS) and \
-                (( msgHour > 22 ) or ( msgHour < 7 )):
+                (( msgHour > 15 ) or ( msgHour < 7 )):
 #بالا گفتی اگه فرستنده از لیست مدیران نیست و ساعت پیام بین یازده شب تا هفت صبحه
                     sender.send_msg(msgSenderId, msgToFirst)
                     sender.send_msg(msgSenderId, msgToBtw)
