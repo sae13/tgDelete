@@ -67,7 +67,7 @@ def schedulerDeleter(sender):
                 print("msg peer id:{}\n".format(msg.peer.peer_id))
                 #sender.send_msg(msg.sender.cmd,"hi")
                 if (msg.sender.id not in ADMIN_IDS) and \
-                (( msgHour > 22 ) or ( msgHour < 7 )):
+                (( msgHour > 0 ) or ( msgHour < 7 )):
 #بالا گفتی اگه فرستنده از لیست مدیران نیست و ساعت پیام بین یازده شب تا هفت صبحه
                     if msgSenderId not in SpammerUsers:
                         SpammerUsers.append(msgSenderId)
