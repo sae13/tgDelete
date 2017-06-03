@@ -14,7 +14,8 @@ receiver = tg.receiver
 sender = tg.sender
 __author__ = 'saeb'
 #هرشخص یه یونیک آی دی داره.یه لیست از مدیران تعریف میکنیم که بدونه اینا مدیرن و مجازن
-ADMIN_IDS =['$0100000084cba20ed401c9a0893540b9']  # you should probably change this.
+ADMIN_IDS =['$0100000084cba20ed401c9a0893540b90']  # you should probably change this.
+SpammerUsers=[]
 msgToFirst = "سلام همکار گرامی.\n\
 بنا بر قوانین گروه، ارسال پیام از ساعت ۲۳ تا هفت صبح \
 ممنوع می‌باشد.\n\
@@ -60,11 +61,18 @@ def schedulerDeleter(sender):
                 # msgSenderId = {}".format(msgHour, msgID,\
                 # msgSenderId))
                 #print("\n msg txt = {} \n".format(msg.text))
+                dbTextFile = open("dbTextFile.text","a")
+                dbTextFile.write("\n\n\n\n\n{}".format(msg))
+                dbTextFile.close
+                print("msg peer id:{}\n".format(msg.peer.peer_id))
+                #sender.send_msg(msg.sender.cmd,"hi")
                 if (msg.sender.id not in ADMIN_IDS) and \
                 (( msgHour > 22 ) or ( msgHour < 7 )):
 #بالا گفتی اگه فرستنده از لیست مدیران نیست و ساعت پیام بین یازده شب تا هفت صبحه
-                    sender.send_msg(msgSenderId, msgToFirst)
-                    sender.send_msg(msgSenderId, msgToBtw)
+                    if msgSenderId not in SpammerUsers:
+                        SpammerUsers.append(msgSenderId)
+                        sender.send_msg(msgSenderId, msgToFirst)
+                        sender.send_msg(msgSenderId, msgToBtw)
                     sender.fwd(msgSenderId,msgID)
                     sender.message_delete(msgID)
 					#به طرف پیامای پیش فرض رو که تعریف کردیم میده بعد پیامی فرستاده
